@@ -8,6 +8,6 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 public class rkztApplication {
     public static void main(String[] args) {
         SpringApplication.run(rkztApplication.class,args);
-        System.out.println("111");
+        System.out.println("222");
     }
 }
