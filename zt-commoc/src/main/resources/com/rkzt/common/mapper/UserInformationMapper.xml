@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rkzt.common.mapper.UserInformationMapper">
+  <resultMap id="BaseResultMap" type="com.rkzt.common.domain.UserInformation">
+    <!--@mbg.generated-->
+    <!--@Table user_information-->
+    <id column="user_id" jdbcType="VARCHAR" property="userId" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="userpassword" jdbcType="VARCHAR" property="userpassword" />
+    <result column="user_email" jdbcType="VARCHAR" property="userEmail" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    user_id, username, userpassword, user_email
+  </sql>
+</mapper>
