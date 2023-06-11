@@ -1,11 +1,14 @@
 package com.rkzt.common.controller;
 
+import com.alibaba.fastjson2.JSONObject;
 import com.rkzt.common.config.RedisService;
 import com.rkzt.common.domain.UserInformation;
 import com.rkzt.common.service.UserInformationService;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,6 +26,8 @@ public class Testt {
 
     @Autowired
     private UserInformationService userInformationService;
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
 
 
     @GetMapping("rabbitmq")
@@ -53,6 +58,16 @@ public class Testt {
     public String getmessage2(){
         List<UserInformation> userInformationList = userInformationService.getAll();
         return userInformationList.toString();
+    }
+
+
+    @GetMapping("/jiami/{message}")
+    public JSONObject jiami(@PathVariable String message){
+        String j = passwordEncoder.encode(message);
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("加密后：",j);
+        jsonObject.put("解密",passwordEncoder.matches(message,j));
+        return jsonObject;
     }
 
 }
