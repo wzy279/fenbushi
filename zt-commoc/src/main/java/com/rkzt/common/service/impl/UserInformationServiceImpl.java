@@ -13,7 +13,7 @@ import java.util.List;
 
 @Service
 @Component
-public class UserInformationServiceImpl implements UserInformationService {
+public class UserInformationServiceImpl implements UserInformationService{
 
     @Autowired
     UserInformationMapper userInformationMapper;

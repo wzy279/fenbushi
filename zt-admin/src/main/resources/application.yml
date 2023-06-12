@@ -4,20 +4,21 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
-    password: Wzy020730!
-    url: jdbc:mysql://localhost:3306/gaokao?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
+    password: Root_123
+    url: jdbc:mysql://8.130.72.37:3306/RKXZT?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
   rabbitmq:
-    host: 192.168.30.129
+    host: 8.130.72.37
     port: 5672
     username: admin
-    password: admin
+    password: aaaaaa
     virtual-host: /Test
     listener:
       simple:
         prefetch: 1
   redis:
-    host: 127.0.0.1
+    host: 8.130.72.37
     port: 6379
+    password: 123321
   mail:
     username: 1976823609@qq.com
     password: bbzwhunbhsupciab
@@ -28,3 +29,18 @@ spring:
           ssl:
             enable: true
     default-encoding: utf-8
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+minio:
+  #服务地址
+  endpoint: http://8.130.72.37:9000
+  #文件地址
+  fileHost: http://8.130.72.37:9000
+  #用户名
+  access-Key: minioadmin
+  #密码
+  secret-Key: minioadmin
+  #存储桶地址
+  bucket: rkxztimg

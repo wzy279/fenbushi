@@ -3,18 +3,20 @@ package com.rkzt.common.controller;
 import com.alibaba.fastjson2.JSONObject;
 import com.rkzt.common.config.EmailConfig;
 import com.rkzt.common.config.JwtConfig;
+import com.rkzt.common.config.MinioProperties;
 import com.rkzt.common.config.RedisService;
 import com.rkzt.common.domain.User;
 import com.rkzt.common.domain.UserInformation;
 import com.rkzt.common.service.UserInformationService;
+import com.rkzt.common.util.MinioUtil;
+import lombok.SneakyThrows;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.annotation.Resource;
 import javax.mail.MessagingException;
 import java.util.HashMap;
 import java.util.List;
@@ -35,6 +37,9 @@ public class Testt {
     @Autowired
     private EmailConfig emailConfig;
 
+    @Autowired
+    private MinioProperties minioProperties;
+
 
     @GetMapping("rabbitmq")
     public String testSendObjectQueue(){
@@ -50,7 +55,6 @@ public class Testt {
     @GetMapping("redis")
     public String tosendredis(){
         redisService.add("test:wzy","666");
-
         System.out.println(redisService.get("test:wzy"));
         return redisService.get("test:wzy");
     }
@@ -91,7 +95,9 @@ public class Testt {
     }
 
 
-
+    /*
+    * 邮箱发送验证码
+    * */
     @GetMapping("/email")
     public JSONObject email() throws MessagingException {
         String email = "wangzhaoyi@qit.edu.cn";
@@ -99,6 +105,27 @@ public class Testt {
         JSONObject object = new JSONObject();
         object.put("验证码",yanzhengma);
         return object;
+    }
+
+
+    @PostMapping("upload/minio")
+    public String uploadminio(MultipartFile file){
+        try {
+            long l = System.currentTimeMillis();
+            String fileName = l+file.getOriginalFilename();
+            MinioUtil.createBucket(minioProperties.getBucket());
+            MinioUtil.uploadFile(minioProperties.getBucket(),file,fileName);
+            String url = MinioUtil.getPreSignedObjectUrl(minioProperties.getBucket(),fileName);
+
+            String[]  strs=url.split("\\?");
+            url = strs[0];
+            System.out.println(url);
+            url = java.net.URLDecoder.decode(url,"UTF-8");
+            return url;
+        }
+        catch (Exception e){
+            return "error";
+        }
     }
 
 
