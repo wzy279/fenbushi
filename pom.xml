@@ -17,6 +17,7 @@
     <modules>
         <module>zt-admin</module>
         <module>zt-commoc</module>
+        <module>zt-user</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
