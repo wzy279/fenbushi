@@ -20,7 +20,7 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="RKXZT" options="" />
+      <module name="RKXZT" options="-parameters" />
       <module name="admin" options="-parameters" />
       <module name="common" options="-parameters" />
       <module name="zt-admin" options="-parameters" />

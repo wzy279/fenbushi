@@ -2,18 +2,20 @@ package com.rkzt.user.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.rkzt.common.config.EmailConfig;
+import com.rkzt.common.config.JwtConfig;
 import com.rkzt.common.config.RedisService;
-import com.rkzt.user.config.JwtConfig;
 import com.rkzt.user.domain.User;
 import com.rkzt.user.mapper.UserMapper;
 import com.rkzt.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Service;
 
 import javax.mail.MessagingException;
 import java.sql.Wrapper;
+import java.util.UUID;
 import java.util.concurrent.TimeUnit;
-
+@Service
 public class UserServiceImpl implements UserService {
     @Autowired
     UserMapper userMapper;
@@ -32,7 +34,7 @@ public class UserServiceImpl implements UserService {
 
         if(passwordEncoder.matches(user.getUserPassward(),password_true)){
             user.setUserId(userMapper.selectOneUserIdByUserEmail(user.getUserEmail()));
-            return JwtConfig.getoken(user);
+            return JwtConfig.sign(user.getUserId().toString());
         }
         else return null;
     }
@@ -43,9 +45,10 @@ public class UserServiceImpl implements UserService {
         QueryWrapper<User> wrapper = new QueryWrapper();
         wrapper.in("user_email",user.getUserEmail());
 
-        if(userMapper.selectCount(wrapper).equals(0)){
+        if(userMapper.selectCount(wrapper).equals(0L)){
             String password_jiami = passwordEncoder.encode(user.getUserPassward());
 //            userMapper.insertSelective(user);
+            user.setUserId(UUID.randomUUID().toString());
             user.setUserPassward(password_jiami);
             userMapper.insert(user);
             return true;
@@ -58,12 +61,12 @@ public class UserServiceImpl implements UserService {
     public boolean retrieve_password1(String user_email) throws MessagingException {
         if(redisService.hasKey(user_email)) return false;
         else{
-            QueryWrapper<User> wrapper = new QueryWrapper();
+            QueryWrapper<User> wrapper = new QueryWrapper<>();
             wrapper.in("user_email",user_email);
-            if(userMapper.selectCount(wrapper).equals(0)) return false;
+            if(userMapper.selectCount(wrapper).equals(0L)) return false;
             else{
                 String yanzhengma = emailConfig.contextLoads(user_email);
-                redisService.add("yanzhengma:"+user_email,yanzhengma,60, TimeUnit.SECONDS);
+                redisService.add("yanzhengma:"+user_email,yanzhengma,200, TimeUnit.SECONDS);
                 return true;
             }
         }
@@ -71,16 +74,16 @@ public class UserServiceImpl implements UserService {
 //    找回密码，第二步
     @Override
     public boolean retrieve_password2(String user_email,String yanzhengma,String password) {
-        if(redisService.hasKey(user_email)){
-            if(redisService.get(user_email).equals(yanzhengma)){
-                QueryWrapper<User> wrapper = new QueryWrapper();
+        if(redisService.hasKey("yanzhengma:"+user_email)){
+            if(redisService.get("yanzhengma:"+user_email).equals("\""+yanzhengma+"\"")){
+                QueryWrapper<User> wrapper = new QueryWrapper<>();
                 wrapper.in("user_email",user_email);
                 userMapper.delete(wrapper);
-
                 String password_jiami = passwordEncoder.encode(password);
                 User user = new User();
                 user.setUserEmail(user_email);
                 user.setUserPassward(password_jiami);
+                user.setUserId(UUID.randomUUID().toString());
                 userMapper.insert(user);
                 return true;
             }

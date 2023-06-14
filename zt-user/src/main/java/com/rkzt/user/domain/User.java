@@ -13,7 +13,7 @@ import lombok.Data;
 @TableName(value = "`user`")
 public class User {
     @TableId(value = "user_id", type = IdType.INPUT)
-    private Integer userId;
+    private String userId;
 
     @TableField(value = "user_email")
     private String userEmail;

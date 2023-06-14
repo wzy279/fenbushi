@@ -5,20 +5,13 @@ import com.rkzt.common.config.EmailConfig;
 import com.rkzt.common.config.JwtConfig;
 import com.rkzt.common.config.MinioProperties;
 import com.rkzt.common.config.RedisService;
-import com.rkzt.common.domain.User;
-import com.rkzt.common.domain.UserInformation;
-import com.rkzt.common.domain.UserMessage;
-import com.rkzt.common.service.UserInformationService;
-import com.rkzt.common.service.UserMessageService;
 import com.rkzt.common.util.MinioUtil;
-import lombok.SneakyThrows;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.annotation.Resource;
 import javax.mail.MessagingException;
 import java.util.HashMap;
 import java.util.List;
@@ -33,8 +26,6 @@ public class Testt {
     private RedisService redisService;
 
     @Autowired
-    private UserInformationService userInformationService;
-    @Autowired
     private BCryptPasswordEncoder passwordEncoder;
     @Autowired
     private EmailConfig emailConfig;
@@ -43,8 +34,6 @@ public class Testt {
     private MinioProperties minioProperties;
 
 
-    @Autowired
-    private UserMessageService userMessageService;
 
 
     @GetMapping("rabbitmq")
@@ -64,41 +53,41 @@ public class Testt {
         System.out.println(redisService.get("test:wzy"));
         return redisService.get("test:wzy");
     }
-
-    @GetMapping("sql")
-    public String getmessage(){
-        UserInformation userInformation = userInformationService.getbyid("2");
-        return userInformation.toString();
-    }
-    @GetMapping("sql2")
-    public String getmessage2(){
-        List<UserInformation> userInformationList = userInformationService.getAll();
-        return userInformationList.toString();
-    }
-
-
-    @GetMapping("/jiami/{message}")
-    public JSONObject jiami(@PathVariable String message){
-        String j = passwordEncoder.encode(message);
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("加密后：",j);
-        jsonObject.put("解密",passwordEncoder.matches(message,j));
-        return jsonObject;
-    }
-
-    //测试生成token是否成功
-    @GetMapping("/jwt/{message}")
-    public JSONObject jwt(@PathVariable String message){
-        User user = new User();
-        user.setId("1");
-        user.setName(message);
-        JSONObject jsonObject = new JSONObject();
-        String token = JwtConfig.getoken(user);
-        jsonObject.put("token",token);
-        user = JwtConfig.jiemi(token);
-        jsonObject.put("User",user);
-        return jsonObject;
-    }
+//
+//    @GetMapping("sql")
+//    public String getmessage(){
+//        UserInformation userInformation = userInformationService.getbyid("2");
+//        return userInformation.toString();
+//    }
+//    @GetMapping("sql2")
+//    public String getmessage2(){
+//        List<UserInformation> userInformationList = userInformationService.getAll();
+//        return userInformationList.toString();
+//    }
+//
+//
+//    @GetMapping("/jiami/{message}")
+//    public JSONObject jiami(@PathVariable String message){
+//        String j = passwordEncoder.encode(message);
+//        JSONObject jsonObject = new JSONObject();
+//        jsonObject.put("加密后：",j);
+//        jsonObject.put("解密",passwordEncoder.matches(message,j));
+//        return jsonObject;
+//    }
+//
+//    //测试生成token是否成功
+//    @GetMapping("/jwt/{message}")
+//    public JSONObject jwt(@PathVariable String message){
+//        User user = new User();
+//        user.setId("1");
+//        user.setName(message);
+//        JSONObject jsonObject = new JSONObject();
+//        String token = JwtConfig.getoken(user);
+//        jsonObject.put("token",token);
+//        user = JwtConfig.jiemi(token);
+//        jsonObject.put("User",user);
+//        return jsonObject;
+//    }
 
 
     /*
@@ -134,11 +123,6 @@ public class Testt {
         }
     }
 
-
-    @GetMapping("tt")
-    public UserMessage tttt(){
-        return userMessageService.getById(1);
-    }
 
 
 
