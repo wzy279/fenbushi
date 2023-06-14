@@ -7,7 +7,9 @@ import com.rkzt.common.config.MinioProperties;
 import com.rkzt.common.config.RedisService;
 import com.rkzt.common.domain.User;
 import com.rkzt.common.domain.UserInformation;
+import com.rkzt.common.domain.UserMessage;
 import com.rkzt.common.service.UserInformationService;
+import com.rkzt.common.service.UserMessageService;
 import com.rkzt.common.util.MinioUtil;
 import lombok.SneakyThrows;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -39,6 +41,10 @@ public class Testt {
 
     @Autowired
     private MinioProperties minioProperties;
+
+
+    @Autowired
+    private UserMessageService userMessageService;
 
 
     @GetMapping("rabbitmq")
@@ -126,6 +132,12 @@ public class Testt {
         catch (Exception e){
             return "error";
         }
+    }
+
+
+    @GetMapping("tt")
+    public UserMessage tttt(){
+        return userMessageService.getById(1);
     }
 
 
