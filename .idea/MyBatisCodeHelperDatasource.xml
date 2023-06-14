@@ -10,6 +10,7 @@
         <option name="javaModelPackage" value="com.rkzt.common.domain" />
         <option name="javaModelPath" value="$PROJECT_DIR$/zt-commoc/src/main/java" />
         <option name="lastDatabaseCrudChooseModuleName" value="zt-commoc" />
+        <option name="lombokDataAnnotation" value="true" />
         <option name="mapperAnnotaion" value="true" />
         <option name="modelAddToString" value="true" />
         <option name="moduleNameToPackageAndPathMap">
@@ -31,8 +32,21 @@
             </entry>
           </map>
         </option>
+        <option name="p3CComment" value="true" />
         <option name="tableGenerateConfigs">
           <map>
+            <entry key="gaokao:school">
+              <value>
+                <TableGenerateConfig>
+                  <option name="generatedKey" value="" />
+                  <option name="javaModelName" value="School" />
+                  <option name="moduleName" value="zt-commoc" />
+                  <option name="sequenceColumn" value="" />
+                  <option name="sequenceId" value="" />
+                  <option name="useActualColumnName" value="false" />
+                </TableGenerateConfig>
+              </value>
+            </entry>
             <entry key="gaokao:user_information">
               <value>
                 <TableGenerateConfig>
@@ -45,9 +59,21 @@
                 </TableGenerateConfig>
               </value>
             </entry>
+            <entry key="gaokao:user_message">
+              <value>
+                <TableGenerateConfig>
+                  <option name="generatedKey" value="" />
+                  <option name="javaModelName" value="UserMessage" />
+                  <option name="moduleName" value="zt-commoc" />
+                  <option name="sequenceColumn" value="" />
+                  <option name="sequenceId" value="" />
+                  <option name="useActualColumnName" value="false" />
+                </TableGenerateConfig>
+              </value>
+            </entry>
           </map>
         </option>
-        <option name="useMybatisPlus2" value="true" />
+        <option name="userMybatisPlus" value="true" />
         <option name="xmlMapperPackage" value="com.rkzt.common.mapper" />
         <option name="xmlMapperPath" value="$PROJECT_DIR$/zt-commoc/src/main/resources" />
       </ProjectProfile>
