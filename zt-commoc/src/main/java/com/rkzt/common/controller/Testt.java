@@ -1,6 +1,7 @@
 package com.rkzt.common.controller;
 
 import com.alibaba.fastjson2.JSONObject;
+import com.rkzt.common.anno.JwtToken;
 import com.rkzt.common.config.EmailConfig;
 import com.rkzt.common.config.JwtConfig;
 import com.rkzt.common.config.MinioProperties;
