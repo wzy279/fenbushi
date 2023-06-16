@@ -41,6 +41,6 @@ public class UserServiceTest {
 
     @Test//CxC14B
     void retrieve_password2(){
-        System.out.println(userService.retrieve_password2("fengxueyong@qit.edu.cn","o153DU","123456"));
+        System.out.println(userService.retrieve_password2("fengxueyong@qit.edu.cn","2gZ016","123456"));
     }
 }
