@@ -10,6 +10,7 @@
         <module name="zt-user" />
         <module name="zt-admin" />
         <module name="zt-commoc" />
+        <module name="zt-question" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -26,6 +27,7 @@
       <module name="zt-admin" options="-parameters" />
       <module name="zt-commoc" options="-parameters" />
       <module name="zt-login" options="-parameters" />
+      <module name="zt-question" options="-parameters" />
       <module name="zt-user" options="-parameters" />
     </option>
   </component>
