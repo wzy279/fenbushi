@@ -6,6 +6,7 @@ import com.rkzt.common.config.EmailConfig;
 import com.rkzt.common.config.JwtConfig;
 import com.rkzt.common.config.MinioProperties;
 import com.rkzt.common.config.RedisService;
+import com.rkzt.common.core.Result;
 import com.rkzt.common.util.MinioUtil;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.mail.MessagingException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -42,15 +44,15 @@ public class Testt {
         Map<String, Object> msg = new HashMap<>();
         msg.put("name","周杰伦");
         msg.put("age","21");
-        for(int i=0;i<10;i++){
-            rabbitTemplate.convertAndSend("object.queue",msg);
-        }
+        rabbitTemplate.convertAndSend("object.queue",msg);
         return "发送成功";
     }
 
     @GetMapping("redis")
     public String tosendredis(){
         redisService.add("test:wzy","666");
+        JSONObject jsonObject = new JSONObject();
+
         System.out.println(redisService.get("test:wzy"));
         return redisService.get("test:wzy");
     }
@@ -95,6 +97,7 @@ public class Testt {
     * 邮箱发送验证码
     * */
     @GetMapping("/email")
+    @JwtToken
     public JSONObject email() throws MessagingException {
         String email = "wangzhaoyi@qit.edu.cn";
         String yanzhengma = emailConfig.contextLoads(email);
