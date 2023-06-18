@@ -85,6 +85,7 @@ public class UserServiceImpl implements UserService {
                 user.setUserPassward(password_jiami);
                 user.setUserId(UUID.randomUUID().toString());
                 userMapper.insert(user);
+                redisService.delete("yanzhengma:"+user_email);
                 return true;
             }
         }

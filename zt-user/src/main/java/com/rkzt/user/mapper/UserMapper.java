@@ -13,8 +13,6 @@ public interface UserMapper extends BaseMapper<User> {
 	String selectOneUserPasswardByUserEmail(@Param("userEmail")String userEmail);
 	//通过email查询id
 	String selectOneUserIdByUserEmail(@Param("userEmail")String userEmail);
-	//添加账号信息
-//	int insertSelective(User user);
 
 
 

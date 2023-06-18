@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rkzt.question.mapper.QuestionMapper">
+  <resultMap id="BaseResultMap" type="com.rkzt.question.domain.Question">
+    <!--@mbg.generated-->
+    <!--@Table question-->
+    <id column="question_id" jdbcType="INTEGER" property="questionId" />
+    <result column="question_context" jdbcType="VARCHAR" property="questionContext" />
+    <result column="question_anwser" jdbcType="VARCHAR" property="questionAnwser" />
+    <result column="anwser_A" jdbcType="VARCHAR" property="anwserA" />
+    <result column="anwser_B" jdbcType="VARCHAR" property="anwserB" />
+    <result column="anwser_C" jdbcType="VARCHAR" property="anwserC" />
+    <result column="anwser_D" jdbcType="VARCHAR" property="anwserD" />
+    <result column="analyze" jdbcType="VARCHAR" property="analyze" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    question_id, question_context, question_anwser, anwser_A, anwser_B, anwser_C, anwser_D, 
+    `analyze`, `type`
+  </sql>
+</mapper>
