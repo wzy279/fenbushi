@@ -28,4 +28,8 @@
     from exam_record
     where user_id=#{userId,jdbcType=VARCHAR}
   </select>
+
+  <select id="selectAllByUserId" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/> from exam_record where user_id=#{usrId} order by time desc
+</select>
 </mapper>
