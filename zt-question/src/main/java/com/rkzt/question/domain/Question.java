@@ -58,8 +58,8 @@ public class Question {
     /**
      * 解析
      */
-    @TableField(value = "analyze")
-    private String analyze;
+    @TableField(value = "analyzee")
+    private String analyzee;
 
     /**
      * 类别
