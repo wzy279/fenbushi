@@ -42,8 +42,10 @@ public class Testt {
     @GetMapping("rabbitmq")
     public String testSendObjectQueue(){
         Map<String, Object> msg = new HashMap<>();
-        msg.put("name","周杰伦");
-        msg.put("age","21");
+
+        msg.put("id","gh");
+        ArrayList<Integer> list = new ArrayList<>();
+        msg.put("timu",list);
         rabbitTemplate.convertAndSend("object.queue",msg);
         return "发送成功";
     }
