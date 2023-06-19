@@ -17,6 +17,7 @@ public class UserController {
     UserService userService;
 
     @PostMapping("Login")
+    @CrossOrigin
     public Result Login(@RequestBody User user){
         String token = userService.Login(user);
         if(token==null) return new Result(500,null,"账号或密码错误");
@@ -24,6 +25,7 @@ public class UserController {
     }
 
     @PostMapping("regist")
+    @CrossOrigin
     public Result Register(@RequestBody JSONObject json){
         String userEmail = json.getString("userEmail");
         String userPassword = json.getString("userPassward");
@@ -36,6 +38,7 @@ public class UserController {
     }
 
     @PostMapping("retrievePassword1")
+    @CrossOrigin
     public Result retrievePassword1(@RequestBody JSONObject json) throws MessagingException {
         String userEmail = json.getString("userEmail");
         if(userService.retrieve_password1(userEmail))
@@ -44,6 +47,7 @@ public class UserController {
     }
 
     @PostMapping("retrievePassword2")
+    @CrossOrigin
     public Result retrievePassword2(@RequestBody JSONObject json){
         String userEmail = json.getString("userEmail");
         String yanzhengma = json.getString("yanzhengma");

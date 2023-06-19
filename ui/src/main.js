@@ -8,7 +8,7 @@ import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 import App from './App.vue'
 
 
-axios.defaults.baseURL='http://127.0.0.1:4523/m1/2884852-0-default'
+axios.defaults.baseURL='http://127.0.0.1:8080'
 const app = createApp(App)
 app.use(ElementPlus,{
     locale:zhCn,

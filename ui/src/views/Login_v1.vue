@@ -1,24 +1,27 @@
 <template>
 <!--  <HelloWorld msg="Welcome to Your Vue.js App"></HelloWorld>-->
   <div class="login">
-
+    <div style="top: 500px">这是登录页面</div>
   <div class="container">
     <el-form :model="form">
       <el-form-item label="邮箱">
         <el-input v-model="form.userEmail"></el-input>
       </el-form-item>
       <el-form-item label="密码">
-        <el-input v-model="form.userPassward"></el-input>
+        <el-input v-model="form.userPassward" type="password"></el-input>
       </el-form-item>
       <el-button @click="login()">登录</el-button>
       <el-button @click="jumptoregist()">注册</el-button>
+      <el-button @click="retrievePassword()">忘记密码</el-button>
     </el-form>
+
   </div>
   </div>
 </template>
 
 <script>
 import {login} from "@/api/login";
+import {ElMessage} from "element-plus";
 
 export default {
   name: "Login_v1",
@@ -35,16 +38,34 @@ export default {
     jumptoregist(){
       this.$router.push('/regist')
     },
-
+    retrievePassword(){
+      this.$router.push('/retrievePassword')
+    },
+    option(type,message){
+      ElMessage({
+        message: message,
+        type: type,
+      })
+    },
     login(){
         login(this.form).then(response => {
           // 请求成功处理
           console.log(response.data);
+          if(response.data.code===200){
+            this.option("success",response.data.msg)
+            localStorage.setItem("token",response.data.data)
+            this.$router.push('/home')
+          }else {
+            this.option("error",response.data.msg)
+          }
+          // alert(this.shuju)
         })
             .catch(error => {
+              this.option("error","服务器错误请重试！")
               // 请求失败处理
               console.error(error);
             });
+        // alert(this.shuju.code)
     }
   }
 }
