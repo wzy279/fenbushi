@@ -52,6 +52,7 @@ public class QuestionServiceImpl implements QuestionService {
         examRecord.setUserId(userid);
         examRecord.setTime(Calendar.getInstance().getTime());
         examRecordMapper.insert(examRecord);
+
         List<Integer> list = examRecordMapper.selectIdByUserId(userid);
         int jiluid = list.get(list.size()-1);
         System.out.println("记录id"+jiluid);

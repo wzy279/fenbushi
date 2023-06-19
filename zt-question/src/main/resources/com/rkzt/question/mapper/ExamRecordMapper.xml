@@ -28,4 +28,8 @@
     from exam_record
     where user_id=#{userId,jdbcType=VARCHAR}
   </select>
+
+<!--  <update id="updateScoreById" parameterType="integer" >-->
+<!--    update exam_record set score=#{score} where questionId=#{questionId}-->
+<!--</update>-->
 </mapper>

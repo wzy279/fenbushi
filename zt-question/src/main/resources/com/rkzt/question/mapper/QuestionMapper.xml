@@ -33,4 +33,8 @@
     select question_id
     from question
   </select>
+
+  <select id="selectQuestionAnwserByQuestionId" resultType="string" parameterType="integer">
+    select question_anwser from question where question_id=#{questionId}
+</select>
 </mapper>
