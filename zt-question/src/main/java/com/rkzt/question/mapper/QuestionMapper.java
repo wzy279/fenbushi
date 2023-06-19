@@ -12,6 +12,6 @@ public interface QuestionMapper extends BaseMapper<Question> {
 
     List<Integer> selectQuestionId();
 
-
+    String selectQuestionAnwserByQuestionId(@Param("questionId")Integer questionId);
 
 }
