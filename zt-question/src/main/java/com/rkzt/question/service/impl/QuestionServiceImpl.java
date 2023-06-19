@@ -1,10 +1,14 @@
 package com.rkzt.question.service.impl;
 
+import com.alibaba.fastjson2.JSON;
+import com.alibaba.fastjson2.JSONObject;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.rkzt.question.domain.ExamRecord;
 import com.rkzt.question.domain.Question;
 import com.rkzt.question.mapper.ExamRecordMapper;
 import com.rkzt.question.mapper.QuestionMapper;
 import com.rkzt.question.service.QuestionService;
+import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -62,6 +66,9 @@ public class QuestionServiceImpl implements QuestionService {
         rabbitTemplate.convertAndSend("object.queue",msg);
         return true;
     }
+
+
+
 
 
 }

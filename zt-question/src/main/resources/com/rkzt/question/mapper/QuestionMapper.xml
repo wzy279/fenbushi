@@ -36,5 +36,5 @@
 
   <select id="selectQuestionAnwserByQuestionId" resultType="string" parameterType="integer">
     select question_anwser from question where question_id=#{questionId}
-</select>
+  </select>
 </mapper>

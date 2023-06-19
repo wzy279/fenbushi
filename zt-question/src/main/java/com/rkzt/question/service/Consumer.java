@@ -1,5 +1,7 @@
 package com.rkzt.question.service;
 
+import com.alibaba.fastjson2.JSON;
+import com.alibaba.fastjson2.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.AbstractWrapper;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -28,9 +30,14 @@ public class Consumer {
     public void listenObjectQueue(Map<String, Object> msg) {
         System.out.println("消费者接收到了object.queue的消息：【" + msg + "】");
         int jiluid = (int)msg.get("jiluid");
-        List<Question> list = (List<Question>) msg.get("question");
-
-        //1、遍历根据题目id查询正确答案与用户提交的答案进行比对，如果一样就加分，不一样就减分
+        Object object = msg.get("question");
+        String json = JSONObject.toJSONString(object);
+        System.out.println(json);
+        List<Question> list = JSON.parseArray(json,Question.class);
+//        System.out.println("list是"+list);
+//        System.out.println(list.get(0).toString());
+//        System.out.println(list.get(1).getQuestionAnwser());
+//        1、遍历根据题目id查询正确答案与用户提交的答案进行比对，如果一样就加分，不一样就减分
         int score=0;
         for(Question element:list) {
             if (element.getQuestionAnwser().equals(questionMapper.selectQuestionAnwserByQuestionId(element.getQuestionId()))) {
@@ -45,4 +52,6 @@ public class Consumer {
         queryWrapper.in("id",jiluid);
         examRecordMapper.update(examRecord,queryWrapper);
     }
+
+
 }
