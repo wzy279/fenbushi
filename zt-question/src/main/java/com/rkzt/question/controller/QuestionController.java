@@ -38,11 +38,11 @@ public class QuestionController {
 //    @JwtToken
     public Result submitQuestion(HttpServletRequest httpServletRequest, @RequestBody JSONObject json){
         // 从 http 请求头中取出 token
-//        String token = httpServletRequest.getHeader("token");
-//        System.out.println(json.toString());
+        String token = httpServletRequest.getHeader("token");
+        System.out.println(json.toString());
         Object o= json.get("data");
 //        System.out.println(o.toString());
 //        System.out.println("arraylist是"+arrayList);
-        return new Result(200,questionService.submit("1",o),"success");
+        return new Result(200,questionService.submit(token,o),"success");
     }
 }

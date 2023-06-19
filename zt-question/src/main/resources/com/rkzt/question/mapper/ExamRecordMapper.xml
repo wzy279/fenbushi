@@ -29,7 +29,7 @@
     where user_id=#{userId,jdbcType=VARCHAR}
   </select>
 
-<!--  <update id="updateScoreById" parameterType="integer" >-->
-<!--    update exam_record set score=#{score} where questionId=#{questionId}-->
-<!--</update>-->
+  <select id="selectAllByUserId" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/> from exam_record where user_id=#{usrId} order by time desc
+</select>
 </mapper>
