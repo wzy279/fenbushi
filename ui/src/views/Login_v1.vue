@@ -90,7 +90,7 @@ export default {
 }
 .login{
   /*background-image: url("");*/
-  background-color: pink;
+  background-color: blue;
   background-size: cover;
   background-position: center;
   position: fixed;

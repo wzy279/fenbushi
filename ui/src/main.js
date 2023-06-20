@@ -7,7 +7,6 @@ import zhCn from 'element-plus/es/locale/lang/zh-cn'
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 import App from './App.vue'
 
-
 axios.defaults.baseURL='http://127.0.0.1:81'
 const app = createApp(App)
 app.use(ElementPlus,{
