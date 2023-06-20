@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 
 @RestController
-@RequestMapping("/question")
+@RequestMapping("/api/question")
 public class QuestionController {
     @Autowired
     QuestionService questionService;

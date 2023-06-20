@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @RestController
-@RequestMapping("/question")
+@RequestMapping("/api/question")
 public class ExamRecordController {
 
     @Autowired

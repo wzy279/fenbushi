@@ -13,7 +13,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 public class rkztApplication {
     public static void main(String[] args) {
         SpringApplication.run(rkztApplication.class,args);
-        System.out.println("222");
+        System.out.println("运行成功111");
     }
 
     @Bean
