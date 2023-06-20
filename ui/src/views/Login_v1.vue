@@ -53,8 +53,12 @@ export default {
           console.log(response.data);
           if(response.data.code===200){
             this.option("success",response.data.msg)
-            localStorage.setItem("token",response.data.data)
-            this.$router.push('/home')
+            var storage = window.localStorage;
+            storage.clear();
+            console.log('清空了token')
+            localStorage.setItem("Token",response.data.data)
+            console.log("新token为"+localStorage.getItem("Token"))
+            this.$router.push('/history')
           }else {
             this.option("error",response.data.msg)
           }

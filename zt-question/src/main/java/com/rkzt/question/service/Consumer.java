@@ -27,7 +27,7 @@ public class Consumer {
 
 
     @RabbitListener(queues = "object.queue")
-    public void listenObjectQueue(Map<String, Object> msg) {
+    public void listenObjectQueuee(Map<String, Object> msg) {
         System.out.println("消费者接收到了object.queue的消息：【" + msg + "】");
         int jiluid = (int)msg.get("jiluid");
         Object object = msg.get("question");
@@ -51,6 +51,17 @@ public class Consumer {
         QueryWrapper<ExamRecord> queryWrapper = new QueryWrapper<>();
         queryWrapper.in("id",jiluid);
         examRecordMapper.update(examRecord,queryWrapper);
+    }
+
+//    @RabbitListener(queues = "object.queue")
+    public void listenObjectQueue(Map<String, Object> msg) {
+        System.out.println("消费者接收到了object.queue的消息：【" + msg + "】");
+        int jiluid = (int)msg.get("jiluid");
+        Object object = msg.get("question");
+        String json = JSONObject.toJSONString(object);
+//        System.out.println(json);
+        List<Question> list = JSON.parseArray(json,Question.class);
+        System.out.println(list);
     }
 
 

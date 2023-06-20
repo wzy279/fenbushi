@@ -34,7 +34,7 @@ public class UserServiceImpl implements UserService {
 
         if(passwordEncoder.matches(user.getUserPassward(),password_true)){
             user.setUserId(userMapper.selectOneUserIdByUserEmail(user.getUserEmail()));
-            return JwtConfig.sign(user.getUserId().toString());
+            return JwtConfig.sign(user.getUserId());
         }
         else return null;
     }

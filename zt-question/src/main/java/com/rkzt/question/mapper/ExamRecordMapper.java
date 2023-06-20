@@ -15,7 +15,15 @@ public interface ExamRecordMapper extends BaseMapper<ExamRecord> {
     List<Integer> selectIdByUserId(@Param("userId")String userId);
 
 //    boolean updateScoreById(@Param("questionId")Integer questionId);
+    List<ExamRecord> selectAllByUserId(@Param("userId")String userId);
 
-    List<ExamRecord> selectAllByUserId(@Param("usrId")String usrId);
+
+
+
+
+
+
+
+
 
 }

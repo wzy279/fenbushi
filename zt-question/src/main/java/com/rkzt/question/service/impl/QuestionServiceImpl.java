@@ -3,6 +3,7 @@ package com.rkzt.question.service.impl;
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.rkzt.common.config.JwtConfig;
 import com.rkzt.question.domain.ExamRecord;
 import com.rkzt.question.domain.Question;
 import com.rkzt.question.mapper.ExamRecordMapper;
@@ -32,7 +33,7 @@ public class QuestionServiceImpl implements QuestionService {
         Random random = new Random();
         int count=100;
         boolean[] vis = new boolean[count+5];
-        for(int i=0;i<75;i++){
+        for(int i=0;i<3;i++){
             int id = random.nextInt(count)+1;
             while (vis[id]){
                 id= random.nextInt(count)+1;
@@ -50,6 +51,7 @@ public class QuestionServiceImpl implements QuestionService {
 
     @Override
     public boolean submit(String userid, Object object) {
+        userid = JwtConfig.getUserId(userid);
         Map<String,Object> msg = new HashMap<>();
         //把这条考试记录加到exam_record表中
         ExamRecord examRecord =new ExamRecord();

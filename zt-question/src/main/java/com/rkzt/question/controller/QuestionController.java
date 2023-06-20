@@ -20,25 +20,19 @@ public class QuestionController {
 
     @PostMapping("GetQuestion")
     @JwtToken
+    @CrossOrigin
     public Result getQuestion(){
         return new Result(200,questionService.get_random_question(),"success");
     }
 
-    @PostMapping("CommitQuestion2")
-//    @JwtToken
-    public Result submitQuestion2(HttpServletRequest httpServletRequest, @ModelAttribute("data") ArrayList<Question> arrayList){
-        // 从 http 请求头中取出 token
-//        String token = httpServletRequest.getHeader("token");
-        System.out.println("arraylist是"+arrayList);
-        return new Result(200,questionService.submit("1",arrayList),"success");
-    }
 
 
     @PostMapping("CommitQuestion")
-//    @JwtToken
+    @JwtToken
+    @CrossOrigin
     public Result submitQuestion(HttpServletRequest httpServletRequest, @RequestBody JSONObject json){
         // 从 http 请求头中取出 token
-        String token = httpServletRequest.getHeader("token");
+        String token = httpServletRequest.getHeader("Token");
         System.out.println(json.toString());
         Object o= json.get("data");
 //        System.out.println(o.toString());

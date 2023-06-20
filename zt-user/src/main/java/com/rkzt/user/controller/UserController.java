@@ -20,6 +20,7 @@ public class UserController {
     @CrossOrigin
     public Result Login(@RequestBody User user){
         String token = userService.Login(user);
+        System.out.println("token为："+token);
         if(token==null) return new Result(500,null,"账号或密码错误");
         return new Result(200,token,"登录成功");
     }

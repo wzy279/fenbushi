@@ -17,8 +17,9 @@ public class ExamRecordServiceImpl implements ExamRecordService {
 
     @Override
     public List<ExamRecord> get_history(String token) {
-//        String usrId = JwtConfig.getUserId(token);
-        List<ExamRecord> list = examRecordMapper.selectAllByUserId("1");
+        String usrId = JwtConfig.getUserId(token);
+        List<ExamRecord> list = examRecordMapper.selectAllByUserId(usrId);
+        System.out.println(list);
         return list;
     }
 }
