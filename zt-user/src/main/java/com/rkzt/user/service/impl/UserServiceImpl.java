@@ -44,10 +44,8 @@ public class UserServiceImpl implements UserService {
     public boolean Register(User user) {
         QueryWrapper<User> wrapper = new QueryWrapper();
         wrapper.in("user_email",user.getUserEmail());
-
         if(userMapper.selectCount(wrapper).equals(0L)){
             String password_jiami = passwordEncoder.encode(user.getUserPassward());
-//            userMapper.insertSelective(user);
             user.setUserId(UUID.randomUUID().toString());
             user.setUserPassward(password_jiami);
             userMapper.insert(user);

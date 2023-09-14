@@ -34,9 +34,6 @@ public class Consumer {
         String json = JSONObject.toJSONString(object);
         System.out.println(json);
         List<Question> list = JSON.parseArray(json,Question.class);
-//        System.out.println("list是"+list);
-//        System.out.println(list.get(0).toString());
-//        System.out.println(list.get(1).getQuestionAnwser());
 //        1、遍历根据题目id查询正确答案与用户提交的答案进行比对，如果一样就加分，不一样就减分
         int score=0;
         for(Question element:list) {
@@ -44,7 +41,6 @@ public class Consumer {
                 score++;
             }
         }
-
         //2、将用户最后的分数根据记录id提交到exam_record表中
         ExamRecord examRecord = new ExamRecord();
         examRecord.setScore(score);

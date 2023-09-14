@@ -7,7 +7,7 @@ spring:
     password: Root_123
     url: jdbc:mysql://8.130.72.37:3306/RKXZT?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
   rabbitmq:
-    host: 8.130.72.37
+    host: localhost
     port: 5672
     username: admin
     password: aaaaaa
